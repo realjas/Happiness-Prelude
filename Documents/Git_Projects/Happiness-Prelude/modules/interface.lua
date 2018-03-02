@@ -15,12 +15,40 @@ function Interface:Init()
 		--interface.buildAxe = love.graphics.newImage('assets/images/interface/axeInt.png')
 		--interface.buildHammer = love.graphics.newImage('assets/images/interface/hammerInt.png')
 
-		font = love.graphics.newFont("assets/fonts/LintMcCreeBB.ttf", 25)
-		score = love.graphics.newFont("assets/fonts/LintMcCreeBB.ttf", 45)
+		interface.font = love.graphics.newFont("assets/fonts/LintMcCreeBB.ttf", 25)
+		interface.score = love.graphics.newFont("assets/fonts/LintMcCreeBB.ttf", 45)
+		interface.timer = 0
+		interface.resplice = 1
+		interface.currentMission = ""
+		interface.addWord = love.audio.newSource('assets/sounds/typewriter.wav')
 	end
 
 	function interface.update()
 		--new mission code
+		if interface.newMissionOpacity == 455 then
+			interface.str = currentMission
+			interface.tbl = interface.str:explode(" ")
+			interface.currentMission = ""
+			interface.resplice = 0
+		end
+		interface.timer = interface.timer + 1
+		if interface.timer == 8 then
+			interface.timer = 0
+			if interface.resplice <= table.getn(interface.tbl) then
+				interface.currentMission = ""
+				interface.addWord:play()
+			end
+			for i = 1, interface.resplice do
+				if interface.resplice > table.getn(interface.tbl) then
+					break
+				end
+
+				interface.currentMission = interface.currentMission .. " " .. interface.tbl[i]
+			end
+
+			interface.resplice = interface.resplice + 1
+		end
+
 		if interface.newMissionOpacity >= 0 then
 			interface.newMissionOpacity = interface.newMissionOpacity - 2
 		end
@@ -36,7 +64,7 @@ function Interface:Init()
 			love.graphics.draw(interface.gem, 1100, 100)
 
 			love.graphics.setColor(0, 0, 0, 255)
-			love.graphics.setFont(score)
+			love.graphics.setFont(interface.score)
 			if gems == 0 then 
 				love.graphics.printf("0", 1280-50, 125, 40, "left")
 			elseif gems > 0 then
@@ -49,7 +77,7 @@ function Interface:Init()
 			love.graphics.draw(interface.wood, 1100, 217)
 
 			love.graphics.setColor(0, 0, 0, 255)
-			love.graphics.setFont(score)
+			love.graphics.setFont(interface.score)
 			if wood == 0 then 
 				love.graphics.printf("o", 1280-50, 240, 40, "left")
 			elseif wood > 0 then
@@ -62,7 +90,7 @@ function Interface:Init()
 			love.graphics.draw(interface.wood, 1100, 334)
 
 			love.graphics.setColor(0, 0, 0, 255)
-			love.graphics.setFont(score)
+			love.graphics.setFont(interface.score)
 			if rock == 0 then 
 				love.graphics.printf("o", 1280-50, 375, 40, "left")
 			elseif rock > 0 then
@@ -91,8 +119,8 @@ function Interface:Init()
 		love.graphics.draw(interface.newMission, (1280-893)/2+20, ((960-77)-20))
 		love.graphics.setColor(255, 255, 255, 255)
 
-		love.graphics.setFont(font)
-		love.graphics.printf(currentMission, (1280-893)/2+50, 960-60, 800, "center")
+		love.graphics.setFont(interface.font)
+		love.graphics.printf(interface.currentMission, (1280-893)/2+50, 960-60, 800, "center")
 
 		if build == 1 then
 			--build axe
