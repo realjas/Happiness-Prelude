@@ -1,5 +1,6 @@
 --Libraries
 --HC = require "libs/HC" --hit detection library
+require "libs/utils"
 
 --set background to blue for testing
 --love.graphics.setBackgroundColor( 66, 197, 244 )
@@ -88,6 +89,9 @@ background = Background:Init()
 
 
 function love.load()
+	--initiate fullscreen and appropriate resolution
+	--love.window.setMode(1280, 960)
+
 	reloadGlobals()
 
 	music:load()
@@ -104,10 +108,10 @@ function love.load()
 	mapZ:load()
 	mapOverlay:load()
 	-- clouds:load()
-	slime = love.graphics.newImage('assets/images/characters/slime.png')
 end
 
 function love.update(dt)
+	delta = 1 --dt
 	if gameState == "splash" 
 		or gameState == "mainMenu" 
 		or gameState == "chooseSex" 
@@ -163,5 +167,5 @@ function love.draw()
 
 	--missions:draw()
 	--love.graphics.print( "Blah = " .. map1[math.floor(heroY/map1tileHeight)][math.floor(heroX/map1tileWidth)], 10, 10 )
-	--love.graphics.print("test  = " .. math.floor((heroX/map1tileWidth)),10,60)
+	love.graphics.print("speed  = " .. (scrollSpeed*delta), 30, 10)
 end

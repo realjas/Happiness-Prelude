@@ -47,7 +47,7 @@ function MapOverlay:Init()
 	    	end
 	    end
 	    love.graphics.setColor(255, 255, 255, 255)
-	    if math.floor(heroX/map1tileWidth) > 86 then
+	    if math.floor(heroX/map1tileWidth) > 85 then
 		    love.graphics.draw(mapOverlay.caveShadow,0,0)
 		end
 	end

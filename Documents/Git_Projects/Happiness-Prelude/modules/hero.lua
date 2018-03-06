@@ -79,6 +79,9 @@ function Hero:Init()
 			hero.face.x = 5
 			hero.isWalking = true
 		end
+		if love.mouse.isDown(1) then
+			hero.isWalking = true
+		end
 
 		if hero.isWalking == true then
 			if hero.yScale > 1.1 then
@@ -112,7 +115,7 @@ function Hero:Init()
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX+hero.mapTileWidth/2)/hero.mapTileWidth)] == 3
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX+hero.mapTileWidth/2)/hero.mapTileWidth)] == 4 
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX+hero.mapTileWidth/2)/hero.mapTileWidth)] == 5 then
-					xOffset = xOffset + scrollSpeed
+					xOffset = xOffset + (scrollSpeed*delta)
 				end
 			end
 			if love.keyboard.isDown( "left" ) or love.mouse.isDown(1) then
@@ -122,7 +125,7 @@ function Hero:Init()
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX-hero.mapTileWidth/2)/hero.mapTileWidth)] == 3 
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX-hero.mapTileWidth/2)/hero.mapTileWidth)] == 4 
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX-hero.mapTileWidth/2)/hero.mapTileWidth)] == 5 then
-					xOffset = xOffset - scrollSpeed
+					xOffset = xOffset - (scrollSpeed*delta)
 				end
 			end
 			if love.keyboard.isDown( "up" ) or love.mouse.isDown(1) then
@@ -132,7 +135,7 @@ function Hero:Init()
 					or map1[math.floor((heroY-hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 3 
 					or map1[math.floor((heroY-hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 4 
 					or map1[math.floor((heroY-hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 5 then
-					yOffset = yOffset - scrollSpeed
+					yOffset = yOffset - (scrollSpeed*delta)
 				end
 			end
 			if love.keyboard.isDown( "down" ) or love.mouse.isDown(1) then
@@ -142,7 +145,7 @@ function Hero:Init()
 					or map1[math.floor((heroY+hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 3 
 					or map1[math.floor((heroY+hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 4 
 					or map1[math.floor((heroY+hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 5 then
-					yOffset = yOffset + scrollSpeed
+					yOffset = yOffset + (scrollSpeed*delta)
 				end
 			end
 		end
