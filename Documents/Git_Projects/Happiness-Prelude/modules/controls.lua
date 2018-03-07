@@ -5,16 +5,16 @@ function Controls:Init()
 
 	function controls.update()
 		if love.keyboard.isDown( "up" ) then
-			yOffset = yOffset+(scrollSpeed*delta)
+			yOffset = yOffset+scrollSpeed*delta
 		end
 		if love.keyboard.isDown( "down" ) then
-			yOffset = yOffset-(scrollSpeed*delta)
+			yOffset = yOffset-scrollSpeed*delta
 		end
 		if love.keyboard.isDown( "left" ) then
-			xOffset = xOffset+(scrollSpeed*delta)
+			xOffset = xOffset+scrollSpeed*delta
 		end
 		if love.keyboard.isDown( "right" ) then
-			xOffset = xOffset-(scrollSpeed*delta)
+			xOffset = xOffset-scrollSpeed*delta
 		end
 	end
 

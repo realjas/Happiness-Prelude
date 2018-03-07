@@ -9,7 +9,7 @@ function reloadGlobals()
 	--globals
 	wWidth = love.graphics.getWidth()
 	wHeight = love.graphics.getHeight()
-	scrollSpeed = 4
+	scrollSpeed = 250 --4 <-- pre-delta speed
 	--starting position
 	xOffset = -(35*100)
 	yOffset = -(38*80)
@@ -111,7 +111,8 @@ function love.load()
 end
 
 function love.update(dt)
-	delta = 1 --dt
+	delta = dt
+
 	if gameState == "splash" 
 		or gameState == "mainMenu" 
 		or gameState == "chooseSex" 
@@ -137,7 +138,6 @@ function love.update(dt)
 	end
 
 	mouse:update()
-	love.graphics.print( "DT = " .. dt, 10, 10 )
 end
 
 function love.draw()
@@ -167,5 +167,4 @@ function love.draw()
 
 	--missions:draw()
 	--love.graphics.print( "Blah = " .. map1[math.floor(heroY/map1tileHeight)][math.floor(heroX/map1tileWidth)], 10, 10 )
-	love.graphics.print("speed  = " .. (scrollSpeed*delta), 30, 10)
 end
