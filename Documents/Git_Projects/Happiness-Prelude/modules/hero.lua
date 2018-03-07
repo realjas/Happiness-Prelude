@@ -9,7 +9,7 @@ function Hero:Init()
 	hero.baseScale = 1
 	hero.xScale = 1
 	hero.yScale = 1
-	hero.stepScale = 0.013
+	hero.stepScale = 0.7 --0.013 <-- pre-delta speed
 	--hero.walkSpeed = 2.5
 	hero.walkHeight = "stop"
 	hero.isWalking = true
@@ -96,9 +96,9 @@ function Hero:Init()
 			end
 
 			if hero.walkHeight == "down" then
-				hero.yScale = hero.yScale - hero.stepScale
+				hero.yScale = hero.yScale - hero.stepScale * delta
 			elseif hero.walkHeight == "up" then
-				hero.yScale = hero.yScale + hero.stepScale
+				hero.yScale = hero.yScale + hero.stepScale * delta
 			end
 		end
 
@@ -115,7 +115,7 @@ function Hero:Init()
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX+hero.mapTileWidth/2)/hero.mapTileWidth)] == 3
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX+hero.mapTileWidth/2)/hero.mapTileWidth)] == 4 
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX+hero.mapTileWidth/2)/hero.mapTileWidth)] == 5 then
-					xOffset = xOffset + (scrollSpeed*delta)
+					xOffset = xOffset + scrollSpeed*delta
 				end
 			end
 			if love.keyboard.isDown( "left" ) or love.mouse.isDown(1) then
@@ -125,7 +125,7 @@ function Hero:Init()
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX-hero.mapTileWidth/2)/hero.mapTileWidth)] == 3 
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX-hero.mapTileWidth/2)/hero.mapTileWidth)] == 4 
 					or map1[math.floor(heroY/hero.mapTileHeight)][math.floor((heroX-hero.mapTileWidth/2)/hero.mapTileWidth)] == 5 then
-					xOffset = xOffset - (scrollSpeed*delta)
+					xOffset = xOffset - scrollSpeed*delta
 				end
 			end
 			if love.keyboard.isDown( "up" ) or love.mouse.isDown(1) then
@@ -135,7 +135,7 @@ function Hero:Init()
 					or map1[math.floor((heroY-hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 3 
 					or map1[math.floor((heroY-hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 4 
 					or map1[math.floor((heroY-hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 5 then
-					yOffset = yOffset - (scrollSpeed*delta)
+					yOffset = yOffset - scrollSpeed*delta
 				end
 			end
 			if love.keyboard.isDown( "down" ) or love.mouse.isDown(1) then
@@ -145,7 +145,7 @@ function Hero:Init()
 					or map1[math.floor((heroY+hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 3 
 					or map1[math.floor((heroY+hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 4 
 					or map1[math.floor((heroY+hero.mapTileHeight/2)/hero.mapTileHeight)][math.floor(heroX/hero.mapTileWidth)] == 5 then
-					yOffset = yOffset + (scrollSpeed*delta)
+					yOffset = yOffset + scrollSpeed*delta
 				end
 			end
 		end
